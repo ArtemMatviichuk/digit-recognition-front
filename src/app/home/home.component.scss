@@ -1,0 +1,56 @@
+.result-canvas {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  > * {
+    width: 500px;
+  }
+}
+
+.canvas-container {
+  justify-content: center;
+  margin-top: 20px;
+
+  > canvas {
+    border: 1px solid black;
+  }
+}
+
+.loading-label {
+  margin-top: 20px;
+  text-align: center;
+
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.buttons-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  column-gap: 10px;
+
+  > button {
+    width: 120px;
+  }
+}
+
+.images-container {
+  display: flex;
+  column-gap: 20px;
+  background: azure;
+
+  > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .current-image {
+      max-height: 500px;
+      max-width: 100%;
+      border: 1px solid black;
+    }
+  }
+}

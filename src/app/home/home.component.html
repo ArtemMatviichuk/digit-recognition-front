@@ -1,0 +1,89 @@
+<div class="images-container">
+  <div>
+    <img
+      *ngIf="currentImageSrc"
+      class="current-image"
+      [src]="currentImageSrc"
+    />
+  </div>
+
+  <div>
+    <img *ngIf="resultImageSrc" class="current-image" [src]="resultImageSrc" />
+  </div>
+</div>
+
+<div
+  [style.display]="selectedMode === 'Draw' ? 'flex' : 'none'"
+  class="canvas-container"
+>
+  <canvas #drawingCanvas [width]="400" [height]="400">
+    Your browser does not support the canvas element.
+  </canvas>
+</div>
+
+<div *ngIf="recognizedDigits" class="result-canvas">
+  <mat-form-field>
+    <textarea
+      matInput
+      [ngModel]="recognizedDigits"
+      [rows]="10"
+      style="resize: none"
+    ></textarea>
+  </mat-form-field>
+</div>
+
+<div *ngIf="selectedMode == 'Analize'" class="loading-label">Loading...</div>
+
+<div *ngIf="selectedMode !== 'Analize'">
+  <div class="buttons-container">
+    <button
+      *ngIf="!selectedMode"
+      mat-raised-button
+      color="primary"
+      (click)="selectedMode = 'Draw'"
+    >
+      Малювати
+    </button>
+
+    <button
+      *ngIf="!selectedMode"
+      class="add btn"
+      mat-flat-button
+      (click)="fileDialog.click()"
+    >
+      <span><i class="fas fa-images"></i> Завантажити файл</span>
+
+      <input
+        #fileDialog
+        style="display: none"
+        type="file"
+        accept="image/jpg"
+        (change)="uploadImage($event)"
+      />
+    </button>
+  </div>
+
+  <div class="buttons-container">
+    <button
+      *ngIf="!!selectedMode"
+      mat-raised-button
+      color="primary"
+      (click)="analizeImage()"
+    >
+      Аналізувати
+    </button>
+
+    <button
+      *ngIf="selectedMode === 'Draw'"
+      class="add btn"
+      mat-flat-button
+      (click)="clearCanvas()"
+    >
+      Очистити панель
+    </button>
+  </div>
+
+  <div *ngIf="!!selectedMode || !!currentImageSrc" class="buttons-container">
+    <button mat-raised-button color="warn" (click)="reset()">Скинути</button>
+  </div>
+</div>
